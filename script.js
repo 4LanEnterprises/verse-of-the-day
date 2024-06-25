@@ -9,18 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = parser.parseFromString(data, 'text/html');
             const imageElement = doc.querySelector('img'); // Assume the first image is the Verse of the Day image
             if (imageElement) {
-                // Extract the 'srcset' attribute
-                const srcset = imageElement.getAttribute('srcset');
-                if (srcset) {
-                    // Split the srcset to get the first URL
-                    const relativeUrl = srcset.split(' ')[0];
-                    const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
-                    document.getElementById('verse-image').src = fullUrl;
-                    document.getElementById('verse-image').style.display = 'block';
-                    document.getElementById('verse').style.display = 'none';
-                } else {
-                    document.getElementById('verse').textContent = "Verse image not found.";
-                }
+                // Extract the 'src' attribute
+                const relativeUrl = imageElement.getAttribute('src');
+                const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
+                console.log('Image URL:', fullUrl); // Log the URL for debugging
+                document.getElementById('verse-image').src = fullUrl;
+                document.getElementById('verse-image').style.display = 'block';
+                document.getElementById('verse').style.display = 'none';
             } else {
                 document.getElementById('verse').textContent = "Verse image not found.";
             }
