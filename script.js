@@ -29,3 +29,4 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error fetching the verse of the day:', error);
             document.getElementById('verse').textContent = "Failed to load verse.";
         });
+});
