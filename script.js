@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const targetUrl = 'https://www.bible.com/verse-of-the-day';
 
-    fetch(proxyUrl + targetUrl)
+    fetch(targetUrl)
         .then(response => response.text())
         .then(data => {
             const parser = new DOMParser();
