@@ -12,13 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Extract the 'srcset' attribute
                 const srcset = imageElement.getAttribute('srcset');
                 if (srcset) {
-                    // Split the srcset to get the URLs and resolutions
-                    const srcsetItems = srcset.split(', ');
-                    // Get the highest resolution URL
-                    const highestResItem = srcsetItems[srcsetItems.length - 1];
-                    const highestResUrl = highestResItem.split(' ')[0];
-                    const fullUrl = 'https://www.bible.com' + highestResUrl; // Prepend the base URL
-                    console.log('Image URL:', fullUrl); // Log the URL for debugging
+                    // Split the srcset to get the first URL
+                    const relativeUrl = srcset.split(' ')[0];
+                    const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
                     document.getElementById('verse-image').src = fullUrl;
                     document.getElementById('verse-image').style.display = 'block';
                     document.getElementById('verse').style.display = 'none';
