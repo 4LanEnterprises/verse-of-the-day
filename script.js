@@ -7,9 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            const imageElement = doc.querySelector('img[alt*="Isaiah 53:6"]'); // Use part of the alt text to find the image
+
+            // Log the entire HTML document for inspection
+            console.log('Fetched HTML:', doc.documentElement.innerHTML);
+
+            // Adjust the selector based on the actual HTML structure
+            const imageElement = doc.querySelector('img[alt*="the sins of us all"]'); // Adjust the selector as necessary
             if (imageElement) {
                 let imageUrl = imageElement.src;
+                console.log('Found image URL:', imageUrl);
+
+                // Prepend the base URL if the src is a relative path
                 if (imageUrl.startsWith('/')) {
                     imageUrl = 'https://www.bible.com' + imageUrl;
                 }
