@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Split the srcset to get the URLs and resolutions
                     const srcsetItems = srcset.split(', ');
                     // Get the highest resolution URL
-                    const highestResUrl = srcsetItems[srcsetItems.length - 1].split(' ')[0];
+                    const highestResItem = srcsetItems[srcsetItems.length - 1];
+                    const highestResUrl = highestResItem.split(' ')[0];
                     const fullUrl = 'https://www.bible.com' + highestResUrl; // Prepend the base URL
                     console.log('Image URL:', fullUrl); // Log the URL for debugging
                     document.getElementById('verse-image').src = fullUrl;
