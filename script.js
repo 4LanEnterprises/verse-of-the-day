@@ -7,10 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            const imageElement = doc.querySelector('img[alt*]'); // Use part of the alt text to find the image
+            const imageElement = doc.querySelector('img'); // Assume the first image is the Verse of the Day image
             if (imageElement) {
-                const imageUrl = 'https://www.bible.com' + imageElement.src; // Get the src attribute of the image
-                document.getElementById('verse-image').src = imageUrl;
+                const relativeUrl = imageElement.getAttribute('src');
+                const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
+                document.getElementById('verse-image').src = fullUrl;
                 document.getElementById('verse-image').style.display = 'block';
                 document.getElementById('verse').style.display = 'none';
             } else {
