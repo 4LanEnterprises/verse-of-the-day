@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = parser.parseFromString(data, 'text/html');
             const imageElement = doc.querySelector('img[alt*="Isaiah 53:6"]'); // Use part of the alt text to find the image
             if (imageElement) {
-                const relativeUrl = imageElement.src;
-                const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
-                document.getElementById('verse-image').src = fullUrl;
+                const imageUrl = 'https://www.bible.com' + imageElement.src; // Get the src attribute of the image
+                document.getElementById('verse-image').src = imageUrl;
                 document.getElementById('verse-image').style.display = 'block';
                 document.getElementById('verse').style.display = 'none';
             } else {
