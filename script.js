@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            const imageElement = doc.querySelector('img[alt*="Isaiah 53:6"]'); // Use part of the alt text to find the image
+            const imageElement = doc.querySelector('img[alt*]'); // Use part of the alt text to find the image
             if (imageElement) {
                 const imageUrl = 'https://www.bible.com' + imageElement.src; // Get the src attribute of the image
                 document.getElementById('verse-image').src = imageUrl;
