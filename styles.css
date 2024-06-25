@@ -50,8 +50,7 @@ main {
 }
 
 #verse-image {
-    width: 80%; /* Adjust this value to increase/decrease size */
-    max-width: 800px; /* Set a maximum width */
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
 }
