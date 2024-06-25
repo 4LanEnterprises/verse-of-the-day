@@ -11,11 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (imageElement) {
                 // Extract the 'src' attribute
                 const relativeUrl = imageElement.getAttribute('src');
-                const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
-                console.log('Image URL:', fullUrl); // Log the URL for debugging
-                document.getElementById('verse-image').src = fullUrl;
-                document.getElementById('verse-image').style.display = 'block';
-                document.getElementById('verse').style.display = 'none';
+                console.log('Relative URL:', relativeUrl); // Log the relative URL for debugging
+                if (relativeUrl) {
+                    const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
+                    console.log('Full URL:', fullUrl); // Log the full URL for debugging
+                    document.getElementById('verse-image').src = fullUrl;
+                    document.getElementById('verse-image').style.display = 'block';
+                    document.getElementById('verse').style.display = 'none';
+                } else {
+                    document.getElementById('verse').textContent = "Verse image not found.";
+                }
             } else {
                 document.getElementById('verse').textContent = "Verse image not found.";
             }
