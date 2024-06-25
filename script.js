@@ -9,7 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = parser.parseFromString(data, 'text/html');
             const imageElement = doc.querySelector('img[alt*="Isaiah 53:6"]'); // Use part of the alt text to find the image
             if (imageElement) {
-                const imageUrl = imageElement.src; // Get the src attribute of the image
+                let imageUrl = imageElement.src;
+                if (imageUrl.startsWith('/_next/image?url=')) {
+                    const urlParams = new URLSearchParams(imageUrl.split('?')[1]);
+                    imageUrl = urlParams.get('url');
+                }
                 document.getElementById('verse-image').src = imageUrl;
                 document.getElementById('verse-image').style.display = 'block';
                 document.getElementById('verse').style.display = 'none';
