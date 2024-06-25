@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(proxyUrl + targetUrl)
         .then(response => response.text())
         .then(data => {
-            console.log('Fetched HTML:', data); // Log the fetched HTML for debugging
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            const imageElement = doc.querySelector('.verse-image-selector'); // Update selector based on actual HTML structure
+            const imageElement = doc.querySelector('img[alt*="Isaiah 53:6"]'); // Use part of the alt text to find the image
             if (imageElement) {
-                const imageUrl = imageElement.src;
+                const imageUrl = imageElement.src; // Get the src attribute of the image
                 document.getElementById('verse-image').src = imageUrl;
                 document.getElementById('verse-image').style.display = 'block';
                 document.getElementById('verse').style.display = 'none';
