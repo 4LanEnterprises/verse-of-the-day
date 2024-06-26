@@ -11,15 +11,21 @@ document.addEventListener("DOMContentLoaded", () => {
             // Log the entire HTML for debugging
             console.log('Fetched HTML:', doc.documentElement.innerHTML);
 
-            // Find the image with the class 'verse-image' (adjust the selector based on actual class used)
-            const imageElement = doc.querySelector('img.verse-image'); // Update the selector as needed
+            // Find the image with the appropriate attributes
+            const imageElement = doc.querySelector('img[alt*=" - "]');
             console.log('Image Element:', imageElement); // Log the image element for debugging
 
             if (imageElement) {
-                const relativeUrl = imageElement.getAttribute('src');
-                console.log('Relative URL:', relativeUrl); // Log the relative URL for debugging
-                if (relativeUrl) {
-                    const fullUrl = 'https://www.bible.com' + relativeUrl; // Prepend the base URL
+                // Extract the 'srcset' attribute and find the URL for the highest resolution image
+                const srcset = imageElement.getAttribute('srcset');
+                console.log('Srcset:', srcset); // Log the srcset for debugging
+
+                const srcsetParts = srcset.split(',').map(part => part.trim());
+                const highResImage = srcsetParts.find(part => part.endsWith('2x')).split(' ')[0];
+                console.log('High Res Image URL:', highResImage); // Log the high res image URL for debugging
+
+                if (highResImage) {
+                    const fullUrl = 'https://www.bible.com' + highResImage; // Prepend the base URL
                     console.log('Full URL:', fullUrl); // Log the full URL for debugging
                     document.getElementById('verse-image').src = fullUrl;
                     document.getElementById('verse-image').style.display = 'block';
