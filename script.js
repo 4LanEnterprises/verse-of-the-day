@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const proxyUrl = 'https://corsproxy.io/?';
-    const targetUrl = 'https://www.bible.com/verse-of-the-day';
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const targetUrl = encodeURIComponent('https://www.bible.com/verse-of-the-day');
 
-    fetch(proxyUrl + encodeURIComponent(targetUrl))
-        .then(response => response.text())
+    fetch(proxyUrl + targetUrl)
+        .then(response => response.json())
         .then(data => {
             const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
-            const imageElement = doc.querySelector('img'); // Assume the first image is the Verse of the Day image
+            const doc = parser.parseFromString(data.contents, 'text/html');
+
+            // Log the entire HTML for debugging
+            console.log('Fetched HTML:', doc.documentElement.innerHTML);
+
+            // Find the image with the class 'verse-image' (adjust the selector based on actual class used)
+            const imageElement = doc.querySelector('img.verse-image'); // Update the selector as needed
+            console.log('Image Element:', imageElement); // Log the image element for debugging
+
             if (imageElement) {
                 const relativeUrl = imageElement.getAttribute('src');
                 console.log('Relative URL:', relativeUrl); // Log the relative URL for debugging
@@ -26,6 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error('Error fetching the verse of the day:', error);
-            document.getElementById('verse').textContent = "Error: Failed to load verse.";
+            document.getElementById('verse').textContent = "Failed to load verse.";
         });
 });
