@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const proxyUrl = 'https://api.allorigins.win/get?url=';
+    const proxyUrl = 'https://corsproxy.io/?';
     const targetUrl = encodeURIComponent('https://www.bible.com/verse-of-the-day');
 
     fetch(proxyUrl + targetUrl)
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             const parser = new DOMParser();
-            const doc = parser.parseFromString(data.contents, 'text/html');
+            const doc = parser.parseFromString(data, 'text/html');
 
             // Log the entire HTML for debugging
             console.log('Fetched HTML:', doc.documentElement.innerHTML);
