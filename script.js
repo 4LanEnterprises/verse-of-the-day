@@ -1,18 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const proxyUrl = 'https://corsproxy.io/?';
+    const proxyUrl = 'https://api.allorigins.win/get?url=';
     const targetUrl = encodeURIComponent('https://www.bible.com/verse-of-the-day');
 
     fetch(proxyUrl + targetUrl)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
+            const doc = parser.parseFromString(data.contents, 'text/html');
 
             // Log the entire HTML for debugging
             console.log('Fetched HTML:', doc.documentElement.innerHTML);
 
-            // Find the image with the appropriate attributes
-            const imageElement = doc.querySelector('img[alt*=" - "]');
+            // Find the image element with the 'srcset' attribute
+            const imageElement = doc.querySelector('img[srcset]');
             console.log('Image Element:', imageElement); // Log the image element for debugging
 
             if (imageElement) {
